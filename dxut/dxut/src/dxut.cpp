@@ -12,9 +12,7 @@
 static HWND s_hwnd;
 static uint s_interval = 20;
 
-typedef void(*DRAW_FUNC)();
 static DRAW_FUNC s_on_draw = nullptr;
-
 static MOUSE_FUNC s_on_mouse = nullptr;
 static KEYBOARD_FUNC s_on_keyboard = nullptr;
 
@@ -193,6 +191,10 @@ DXUTAPI bool dxut_init_d3d_window(uint w, uint h, const char *name, IDirect3DDev
 	}
 
 	return true;
+}
+
+DXUTAPI void dxut_display_func(DRAW_FUNC func) {
+	s_on_draw = func;
 }
 
 DXUTAPI void dxut_main_loop() {
