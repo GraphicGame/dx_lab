@@ -15,24 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="inc\dxut.h">
-      <Filter>inc</Filter>
-    </ClInclude>
-    <ClInclude Include="inc\utils.h">
-      <Filter>inc</Filter>
-    </ClInclude>
-    <ClInclude Include="inc\common_headers.h">
-      <Filter>inc</Filter>
-    </ClInclude>
-    <ClInclude Include="inc\input.h">
-      <Filter>inc</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="src\dxut.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="src\utils.cpp">
+    <ClCompile Include="main.cpp">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>

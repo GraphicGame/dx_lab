@@ -5,6 +5,8 @@ VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "dxut", "dxut\dxut.vcxproj", "{1BD664A7-E884-4D23-B9D8-8D53A5438764}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "dxut_test", "dxut_test\dxut_test.vcxproj", "{44D5DE84-F878-4F05-895E-D1358C77A0AA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -15,6 +17,10 @@ Global
 		{1BD664A7-E884-4D23-B9D8-8D53A5438764}.Debug|Win32.Build.0 = Debug|Win32
 		{1BD664A7-E884-4D23-B9D8-8D53A5438764}.Release|Win32.ActiveCfg = Release|Win32
 		{1BD664A7-E884-4D23-B9D8-8D53A5438764}.Release|Win32.Build.0 = Release|Win32
+		{44D5DE84-F878-4F05-895E-D1358C77A0AA}.Debug|Win32.ActiveCfg = Debug|Win32
+		{44D5DE84-F878-4F05-895E-D1358C77A0AA}.Debug|Win32.Build.0 = Debug|Win32
+		{44D5DE84-F878-4F05-895E-D1358C77A0AA}.Release|Win32.ActiveCfg = Release|Win32
+		{44D5DE84-F878-4F05-895E-D1358C77A0AA}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
