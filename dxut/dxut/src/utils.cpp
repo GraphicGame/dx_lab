@@ -24,3 +24,11 @@ DXUTAPI char* wchar_t2char(const wchar_t* str) {
 
 	return buf;
 }
+
+DXUTAPI float deg_2_rad(float d) {
+	return d * (M_PI / 180);
+}
+
+DXUTAPI float rad_2_deg(float r) {
+	return r * ( 180 / M_PI );
+}

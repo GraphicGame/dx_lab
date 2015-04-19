@@ -20,7 +20,7 @@ static bool init_dx(HWND hwnd, uint w, uint h, IDirect3DDevice9 ** device) {
 	HRESULT hr = 0;
 
 	// Step 1: Create the IDirect3D9 object.
-	IDirect3D9* d3d9 = 0;
+	IDirect3D9* d3d9 = nullptr;
 	d3d9 = Direct3DCreate9(D3D_SDK_VERSION);
 
 	if (!d3d9) {
@@ -84,6 +84,7 @@ static bool init_dx(HWND hwnd, uint w, uint h, IDirect3DDevice9 ** device) {
 	}
 
 	d3d9->Release(); // done with d3d9 object
+	d3d9 = nullptr;
 	return true;
 }
 
