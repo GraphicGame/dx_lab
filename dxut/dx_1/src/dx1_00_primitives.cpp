@@ -22,19 +22,21 @@ enum primitive_type {
 };
 static enum primitive_type s_current_pt = PT_TRIANGLE;
 
-float s_angle = 0.0f;
+static float s_angle = 0.0f;
+static float s_lighting_on = true;
 
 typedef struct vertex {
 	vertex() {}
-	vertex(float _x, float _y, float _z) 
-		:x(_x), y(_y), z(_z)
+	vertex(float _x, float _y, float _z, D3DCOLOR _color) 
+		:x(_x), y(_y), z(_z), color(_color)
 	{
 		
 	}
 	float x, y, z;
+	D3DCOLOR color;
 	static const DWORD FVF;
 } vertex;
-const DWORD vertex::FVF = D3DFVF_XYZ;
+const DWORD vertex::FVF = D3DFVF_XYZ | D3DFVF_DIFFUSE;
 
 static void setup_viewport() {
 	D3DVIEWPORT9 vp;
@@ -66,9 +68,9 @@ static void setup_triangle() {
 
 	vertex *vertices;
 	s_vb_triangle->Lock(0, 0, (void**)&vertices, 0);
-	vertices[0] = vertex(0, 0, 0);
-	vertices[1] = vertex(1, 0, 0);
-	vertices[2] = vertex(0.5, 0.5, 0);
+	vertices[0] = vertex(0, 0, 0, RED);
+	vertices[1] = vertex(1, 0, 0, GREEN);
+	vertices[2] = vertex(0.5, 0.5, 0, BLUE);
 	s_vb_triangle->Unlock();
 
 	WORD *indices;
@@ -99,14 +101,14 @@ static void setup_cube() {
 
 	vertex *vertices = nullptr;
 	s_vb_cube->Lock(0, 0, (void**)&vertices, 0);
-	vertices[0] = vertex(-1, 1, 1);
-	vertices[1] = vertex(1, 1, 1);
-	vertices[2] = vertex(1, 1, -1);
-	vertices[3] = vertex(-1, 1, -1);
-	vertices[4] = vertex(-1, -1, 1);
-	vertices[5] = vertex(1, -1, 1);
-	vertices[6] = vertex(1, -1, -1);
-	vertices[7] = vertex(-1, -1, -1);
+	vertices[0] = vertex(-1, 1, 1, RED);
+	vertices[1] = vertex(1, 1, 1, GREEN);
+	vertices[2] = vertex(1, 1, -1, BLUE);
+	vertices[3] = vertex(-1, 1, -1, YELLOW);
+	vertices[4] = vertex(-1, -1, 1, WHITE);
+	vertices[5] = vertex(1, -1, 1, BLUE);
+	vertices[6] = vertex(1, -1, -1, RED);
+	vertices[7] = vertex(-1, -1, -1, GREEN);
 	s_vb_cube->Unlock();
 
 	WORD *indices = nullptr;
@@ -154,6 +156,7 @@ static void setup_dx() {
 	
 	s_device->SetRenderState(D3DRS_FILLMODE, D3DFILL_SOLID);
 	s_device->SetRenderState(D3DRS_MULTISAMPLEANTIALIAS, TRUE);
+	s_device->SetRenderState(D3DRS_SHADEMODE, D3DSHADE_GOURAUD);
 }
 
 static void on_draw() {
@@ -206,6 +209,12 @@ static void on_key(keyboard_state ks, int code) {
 		break;
 	case 'T':
 		s_current_pt = PT_TRIANGLE;
+		break;
+	case 'L':
+		if (ks == KEY_UP) {
+			s_lighting_on = !s_lighting_on;
+			s_device->SetRenderState(D3DRS_LIGHTING, s_lighting_on);
+		}
 		break;
 	default:
 		break;
