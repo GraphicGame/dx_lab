@@ -15,6 +15,8 @@ static IDirect3DVertexBuffer9 *s_vb = nullptr;
 static IDirect3DIndexBuffer9 *s_ib = nullptr;
 static D3DMATERIAL9 s_material;
 static D3DLIGHT9 s_light_direction;
+static D3DLIGHT9 s_light_point;
+static D3DLIGHT9 s_light_spot;
 
 typedef struct vertex {
 	vertex() {}
@@ -176,15 +178,43 @@ static void setup_material() {
 }
 
 static void setup_light() {
-	::ZeroMemory(&s_light_direction, sizeof(s_light_direction));
 	D3DXCOLOR c = D3DXCOLOR(1, 0, 0, 1);
+
+	::ZeroMemory(&s_light_direction, sizeof(s_light_direction));
 	s_light_direction.Type = D3DLIGHT_DIRECTIONAL;
 	s_light_direction.Ambient = c * 0.4f;
 	s_light_direction.Diffuse = c;
 	s_light_direction.Specular = c * 0.8f;
 	s_light_direction.Direction = D3DXVECTOR3(0, 0, 1);
 	
+	::ZeroMemory(&s_light_point, sizeof(s_light_point));
+	s_light_point.Type = D3DLIGHT_POINT;
+	s_light_point.Ambient = c * 0.4f;
+	s_light_point.Diffuse = c;
+	s_light_point.Specular = c * 0.8f;
+	s_light_point.Position = D3DXVECTOR3(0, 0, 0);
+	s_light_point.Range = 6.0f;
+	s_light_point.Attenuation0 = 1.0f;
+	s_light_point.Attenuation0 = 1.0f;
+	s_light_point.Attenuation0 = 1.0f;
+
+	::ZeroMemory(&s_light_spot, sizeof(s_light_spot));
+	s_light_spot.Type = D3DLIGHT_POINT;
+	s_light_spot.Ambient = c * 0.4f;
+	s_light_spot.Diffuse = c;
+	s_light_spot.Specular = c * 0.8f;
+	s_light_spot.Position = D3DXVECTOR3(0, 0, 0);
+	s_light_spot.Range = 6.0f;
+	s_light_spot.Falloff = 1.0f;
+	s_light_spot.Attenuation0 = 1.0f;
+	s_light_spot.Attenuation0 = 1.0f;
+	s_light_spot.Attenuation0 = 1.0f;
+	s_light_spot.Theta = deg_2_rad(20);
+	s_light_spot.Phi = deg_2_rad(40);
+
 	s_device->SetLight(LT_DIRECTIONAL, &s_light_direction);
+	s_device->SetLight(LT_POINT, &s_light_point);
+	s_device->SetLight(LT_SPOT, &s_light_spot);
 }
 
 static void setup_dx() {
@@ -227,10 +257,16 @@ static void on_key(keyboard_state ks, int code) {
 		}
 		break;
 	case 'P':
-
+		if (ks == KEY_UP) {
+			s_light_p_on = !s_light_p_on;
+			s_device->LightEnable(LT_POINT, s_light_p_on);
+		}
 		break;
 	case 'S':
-
+		if (ks == KEY_UP) {
+			s_light_s_on = !s_light_s_on;
+			s_device->LightEnable(LT_SPOT, s_light_s_on);
+		}
 		break;
 	default:
 		break;
