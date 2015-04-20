@@ -80,6 +80,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\dx1_00_primitives.cpp" />
+    <ClCompile Include="src\dx1_01_lighting.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="inc\dx1_common_headers.h" />

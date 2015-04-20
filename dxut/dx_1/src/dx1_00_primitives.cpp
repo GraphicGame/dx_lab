@@ -1,4 +1,5 @@
-#define __exec
+//#define __exec
+#ifdef __exec
 
 #include <stdio.h>
 #include <assert.h>
@@ -221,7 +222,6 @@ static void on_key(keyboard_state ks, int code) {
 	}
 }
 
-#ifdef __exec
 int main(int argc, char *argv[]) {
 	dxut_init_d3d_window(WW, WH, "1", &s_device);
 
